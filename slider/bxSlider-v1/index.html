@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="CSS Grid: Responsive bxSlider">
+		
+		<title>bxSlider_v1 - for CodePen</title>
+				
+		<!-- CSS -->
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	
+	<body>
+	<!-- 
+		Credits
+		
+		Google Web Fonts: Roboto, Oswald
+		Images: https://unsplash.com/ 
+		Slider: https://bxslider.com/
+	-->
+	<main class="main">
+		<h1>bxSlider for the Blog Post</h1>
+		
+		<section class="section">
+			<div class="slider">
+				<div class="slider__content">
+					<!-- Item 1 -->
+					<figure class="slider__item slide">
+						<div class="slide__img-wrap">
+							<a href="#"><img src="https://images.unsplash.com/photo-1513886058874-d4d0e7be32a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="Img description" /></a>
+						</div>
+						<figcaption class="slide__description">
+							<p><time datetime="2019-12-25">december 25, 2019</time></p>
+							<p><a href="#">CategoryName</a></p>
+							<h2><a href="#">The title of the most interesting and popular blog post</a></h2>
+						</figcaption>
+					</figure>
+					
+					<!-- Item 2 -->
+					<figure class="slider__item slide">
+						<div class="slide__img-wrap">
+							<a href="#"><img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80" alt="Img description" /></a>
+						</div>
+						<figcaption class="slide__description">
+							<p><time datetime="2019-12-24">december 24, 2019</time></p>
+							<p><a href="#">CategoryName</a></p>
+							<h2><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a></h2>
+						</figcaption>
+					</figure>
+					
+					<!-- Item 3 -->
+					<figure class="slider__item slide">
+						<div class="slide__img-wrap">
+							<a href="#"><img src="https://images.unsplash.com/photo-1511434139893-de3e59cdeee5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80" alt="Img description" /></a>
+						</div>
+						<figcaption class="slide__description">
+							<p><time datetime="2019-12-23">december 23, 2019</time></p>
+							<p><a href="#">CategoryName</a></p>
+							<h2><a href="#">Vestibulum ante ipsum primis in faucibus orci luctus</a></h2>
+						</figcaption>
+					</figure>
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	<!-- JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	<script>
+		(function($) {
+			'use strict';
+			
+			$(document).ready(function(){
+				$('.slider .slider__content').bxSlider({
+					mode: 'fade',
+					nextText: '&rsaquo;',
+					prevText: '&lsaquo;',
+					pager: false,
+					touchEnabled: false,
+					onSliderLoad: function() {
+						$(this).parent('.bx-viewport').after('<div class="pager"><span class="curr-item">'+viewOfNumber(this.getCurrentSlide()+1)+'</span>'+viewOfNumber(this.getSlideCount())+'</div>');
+						
+						$(this).parents('.slider').css('visibility', 'visible');
+					},
+					onSlideAfter: function($slideElement, oldIndex, newIndex) {
+						$(this).parent('.bx-viewport').next('.pager').find('.curr-item').text(viewOfNumber(newIndex+1));
+					}
+				});
+				
+				function viewOfNumber(n) {
+					return (n < 10 ? "0" : "") + n;
+				}
+	
+			});
+		})(jQuery);	
+	
+		
+	</script>
+	
+	</body>
+</html>
